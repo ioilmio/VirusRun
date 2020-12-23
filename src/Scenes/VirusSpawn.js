@@ -2,9 +2,6 @@
 import Phaser from 'phaser';
 
 export default class VirusSpawner {
-  // /**
-  //  * @param {Phaser.Scene} scene
-  //  */
   constructor(scene, virusKey = 'virus') {
     this.scene = scene;
     this.key = virusKey;

@@ -19,9 +19,11 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image(BOMB_KEY, 'src/assets/bomb.png');
     this.load.image(PILL, 'src/assets/pill.png');
     this.load.image(VIRUS_KEY, 'src/assets/virus.png');
+    this.load.image('checkedBox', 'src/assets/ui/blue_boxCheckmark.png');
+    this.load.image('box', 'src/assets/ui/grey_box.png');
 
 
-    this.load.audio('loop', 'src/assets/Loop.wav');
+    this.load.audio('bgMusic', 'src/assets/bgMusic.mp3');
     this.load.audio('jump', 'src/assets/jump-sound.mp3');
 
     this.load.spritesheet(DUDE_KEY,
@@ -72,7 +74,6 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     assetText.setOrigin(0.5, 0.5);
 
-    // update progress bar
     this.load.on('progress', (value) => {
       percentText.setText(`${parseInt(value * 100, 10)}%`);
       progressBar.clear();
@@ -80,12 +81,10 @@ export default class PreloaderScene extends Phaser.Scene {
       progressBar.fillRect((width / 2) - 140, 280, 280 * value, 30);
     });
 
-    // update file progress text
     this.load.on('fileprogress', (file) => {
       assetText.setText(`Loading asset: ${file.key}`);
     });
 
-    // remove progress bar when complete
     this.load.on('complete', () => {
       progressBar.destroy();
       progressBox.destroy();
@@ -103,15 +102,14 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    this.scene.start('Title');
+    this.scene.start('Intro');
     this.readyCount += 1;
     if (this.readyCount !== 0) {
-      // this.scene.start('Title');
       this.create();
     }
   }
 
   create() {
-    this.scene.start('Title');
+    this.scene.start('Intro');
   }
 }

@@ -19,7 +19,7 @@ export default class GameOverScene extends Phaser.Scene {
     this.menuText = this.add.text(0, 0, 'Play Again?', { fontSize: '32px', fill: '#fff' });
     Phaser.Display.Align.In.Center(this.menuText, this.menuButton);
     this.menuButton.on('pointerdown', () => {
-      this.scene.start('Play');
+      this.scene.start('Title');
     });
   }
 

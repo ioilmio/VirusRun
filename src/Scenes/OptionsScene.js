@@ -1,60 +1,55 @@
 import Phaser from 'phaser';
+import Button from '../Objects/Button';
 
 export default class OptionsScene extends Phaser.Scene {
   constructor() {
     super('Options');
   }
 
-  preload() {
-    this.load.image('checkedBox', 'src/assets/ui/blue_boxCheckmark.png');
-    this.load.image('box', 'src/assets/ui/grey_box.png');
-  }
-
   create() {
-    this.musicOn = true;
-    this.soundOn = true;
+    this.model = this.sys.game.globals.model;
 
-    this.text = this.add.text(300, 100, 'Options', { fontSize: 40 });
-    this.musicButton = this.add.image(200, 200, 'checkedBox');
-    this.musicText = this.add.text(250, 190, 'Music Enabled', { fontSize: 24 });
+    this.text = this.add.text(300, 100, 'Options', { fontSize: '40px' });
 
-    this.soundButton = this.add.image(200, 300, 'checkedBox');
-    this.soundText = this.add.text(250, 290, 'Sound Enabled', { fontSize: 24 });
+    this.menuBtn = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
+    this.musicBtn = this.add.image(200, 200, 'checkedBox');
+    this.musicTxt = this.add.text(250, 190, 'Music Enabled', { fontSize: '24px' });
 
-    this.musicButton.setInteractive();
-    this.soundButton.setInteractive();
+    this.soundBtn = this.add.image(200, 300, 'checkedBox');
+    this.soundTxt = this.add.text(250, 290, 'Sound Enabled', { fontSize: '24px' });
 
-    this.musicButton.on('pointerdown', () => {
-      this.musicOn = !this.musicOn;
+    this.musicBtn.setInteractive();
+    this.soundBtn.setInteractive();
+
+    this.musicBtn.on('pointerdown', () => {
+      this.model.musicOn = !this.model.musicOn;
       this.updateAudio();
     });
 
-    this.soundButton.on('pointerdown', () => {
-      this.soundOn = !this.soundOn;
+    this.soundBtn.on('pointerdown', () => {
+      this.model.soundOn = !this.model.soundOn;
       this.updateAudio();
     });
 
     this.updateAudio();
-    this.menuButton = this.add.sprite(400, 500, 'blueButton1').setInteractive();
-    this.menuText = this.add.text(0, 0, 'Menu', { fontSize: '32px', fill: '#fff' });
-    Phaser.Display.Align.In.Center(this.menuText, this.menuButton);
-
-    this.menuButton.on('pointerdown', () => {
-      this.scene.start('Title');
-    });
   }
 
   updateAudio() {
-    if (this.musicOn === false) {
-      this.musicButton.setTexture('box');
+    if (this.model.musicOn === false) {
+      this.musicBtn.setTexture('box');
+      this.sys.game.globals.bgMusic.stop();
+      this.model.bgMusicPlaying = false;
     } else {
-      this.musicButton.setTexture('checkedBox');
+      this.musicBtn.setTexture('checkedBox');
+      if (this.model.bgMusicPlaying === false) {
+        this.sys.game.globals.bgMusic.play();
+        this.model.bgMusicPlaying = true;
+      }
     }
-
-    if (this.soundOn === false) {
-      this.soundButton.setTexture('box');
+    if (this.model.soundOn === false) {
+      this.soundBtn.setTexture('box');
     } else {
-      this.soundButton.setTexture('checkedBox');
+      this.soundBtn.setTexture('checkedBox');
     }
   }
 }

@@ -19,7 +19,6 @@ export default class BootScene extends Phaser.Scene {
     this.readyCount += 1;
     if (this.readyCount !== 0) {
       this.scene.start('Preloader');
-      // this.create();
     }
   }
 

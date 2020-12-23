@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-// import config from '../Config/config';
+import Button from '../Objects/Button';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
@@ -14,34 +14,17 @@ export default class TitleScene extends Phaser.Scene {
 
   create() {
     this.add.image(500, 300, 'virus');
-    this.gameButton = this.add.sprite(300, 200, 'blueButton1').setInteractive();
-    this.optionsButton = this.add.sprite(300, 300, 'blueButton1').setInteractive();
-    this.creditsButton = this.add.sprite(300, 400, 'blueButton1').setInteractive();
+    this.gameButton = new Button(this, 400, 200, 'blueButton1', 'blueButton2', 'Play', 'Play');
+    this.optionsButton = new Button(this, 400, 300, 'blueButton1', 'blueButton2', 'Options', 'Options');
+    this.creditsButton = new Button(this, 400, 400, 'blueButton1', 'blueButton2', 'Credits', 'Credits');
+    this.leaderBoardButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'LeaderBoard', 'LeaderBoard');
 
-    this.gameText = this.add.text(0, 0, 'Play', { fontSize: '32px', fill: '#fff' });
-    this.optionsText = this.add.text(0, 0, 'Options', { fontSize: '32px', fill: '#fff' });
-    this.creditsText = this.add.text(0, 0, 'Credit', { fontSize: '32px', fill: '#fff' });
-    Phaser.Display.Align.In.Center(this.creditsText, this.creditsButton);
-    Phaser.Display.Align.In.Center(this.gameText, this.gameButton);
-    Phaser.Display.Align.In.Center(this.optionsText, this.optionsButton);
-
-    this.gameButton.on('pointerdown', () => {
-      this.scene.start('Play');
-    });
-    this.optionsButton.on('pointerdown', () => {
-      this.scene.start('Options');
-    });
-    this.creditsButton.on('pointerdown', () => {
-      this.scene.start('Credits');
-    });
-
-
-    this.input.on('pointerover', (_event, gameObjects) => {
-      gameObjects[0].setTexture('blueButton2');
-    });
-
-    this.input.on('pointerout', (_event, gameObjects) => {
-      gameObjects[0].setTexture('blueButton1');
-    });
+    this.model = this.sys.game.globals.model;
+    if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
+      this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
+      this.bgMusic.play();
+      this.model.bgMusicPlaying = true;
+      this.sys.game.globals.bgMusic = this.bgMusic;
+    }
   }
 }

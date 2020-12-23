@@ -19,11 +19,12 @@ export default class GameScene extends Phaser.Scene {
     this.lifeLabel = undefined;
     this.pills = undefined;
     this.virusSpawner = undefined;
-    this.gameOver = false;
+    // this.gameOver = undefined;
     this.life = 3;
   }
 
   create() {
+    console.log('play');
     this.add.image(400, 300, 'sky');
     this.jumpSound = this.sound.add('jump');
 
@@ -126,8 +127,9 @@ export default class GameScene extends Phaser.Scene {
   update() {
     if (this.life === 0) {
       this.physics.pause();
-      this.gameOver = true;
+      // this.gameOver = true;
       this.scene.start('GameOver');
+      // this.gameOver = false;
     }
     if (this.scoreLabel.score === 50) {
       this.lifeLabel.add(1);
