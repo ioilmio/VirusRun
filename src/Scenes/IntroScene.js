@@ -8,7 +8,7 @@ export default class IntroScene extends Phaser.Scene {
   create() {
     this.add.image(400, 300, 'virus');
     this.introText = this.add.text(200, 0, 'Introduction', { fontSize: '34px', fill: '#fff' });
-    this.loreTxt = this.add.text(200, 0, `${'Your planet is in danger and you have to fight a new lethal virus,\n collect medications to stay alive\n or die due to the viral charge\n\n Collect 5 mediactions to get an extra life,\n but 50 points will be subtracted from your total score \n\n Move and Jump using Arrow Keys'}`, { fontSize: '20px', fill: '#fff', align: 'center' });
+    this.loreTxt = this.add.text(200, 0, `${'Your planet is in danger and you have to fight a new lethal virus,\n collect medications to stay alive\n or die due to the viral charge\n\n Collect 5 mediactions to get an extra life,\n but 50 points will be subtracted from your total score \n\n Move and Jump using Arrow Keys\n\n Maybe the hardest game ever\n\n I dare you to score more than 100'}`, { fontSize: '20px', fill: '#fff', align: 'center' });
     this.zone = this.add.zone(400, 300, 800, 600);
 
     this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);

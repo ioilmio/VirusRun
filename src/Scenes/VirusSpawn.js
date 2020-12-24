@@ -16,7 +16,7 @@ export default class VirusSpawner {
   spawn(playerX = 0) {
     const x = (playerX < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
-    const virus = this.group.create(x, 16, this.key);
+    const virus = this.group.create(x, 1, this.key);
     virus.setBounce(1);
     virus.setCollideWorldBounds(true);
     virus.setVelocity(Phaser.Math.Between(-200, 200), 20);

@@ -1,5 +1,8 @@
 import Phaser from 'phaser';
 import Button from '../Objects/Button';
+// import config from '../Config/config';
+import { getScores } from '../ui/LeaderBoard';
+import 'regenerator-runtime';
 
 export default class LeaderBoardScene extends Phaser.Scene {
   constructor() {
@@ -11,7 +14,25 @@ export default class LeaderBoardScene extends Phaser.Scene {
     this.load.image('sky', 'src/assets/sky.png');
   }
 
-  create() {
+  // create() {
+  //   this.add.image(200, 200, 'sky').setScale(3);
+  //   this.add.image(300, 200, 'logo');
+  //   this.add.text(500, 200, 'LeaderBoard',
+  //     {
+  //       font: '20px monospace',
+  //       fill: '#00000',
+  //     });
+  // let highScoreToDisplay = getScores().then(score => score);
+  // if (localStorage.getItem('user') !== null) {
+  //   highScoreToDisplay = (localStorage.getItem('user'));
+  // }
+
+  // this.add.text(600, 300, highScoreToDisplay.toString(),
+  //   { font: '20pt Arial', fill: '#FFFFFF' });
+
+  //   this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
+  // }
+  async create() {
     this.add.image(200, 200, 'sky').setScale(3);
     this.add.image(300, 200, 'logo');
     this.add.text(500, 200, 'LeaderBoard',
@@ -20,19 +41,17 @@ export default class LeaderBoardScene extends Phaser.Scene {
         fill: '#00000',
       });
 
-    // this.menuButton = this.add.sprite(400, 500, 'blueButton1').setInteractive();
-    // this.menuText = this.add.text(0, 0, 'Menu', { fontSize: '32px', fill: '#fff' });
-    // Phaser.Display.Align.In.Center(this.menuText, this.menuButton);
-    // this.menuButton.on('pointerdown', () => {
-    //   this.scene.start('Title');
-    // });
-    // this.input.on('pointerover', (_event, gameObjects) => {
-    //   gameObjects[0].setTexture('blueButton2');
-    // });
+    const style = { fontSize: '32px', backgroundColor: 'black' };
 
-    // this.input.on('pointerout', (_event, gameObjects) => {
-    //   gameObjects[0].setTexture('blueButton1');
-    // });
+    this.add.text(100, 50, 'POS NAME SCORE', style).setTint(0xffffff);
+    // eslint-disable-next-line no-console
+    this.score = await getScores().catch(err => console.error(err));
+
+    this.sortScore = this.score.sort((a, b) => (a.score > b.score ? -1 : 1));
+
     this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
+    for (let i = 0; i <= 4; i += 1) {
+      this.add.text(100, 90 * (i + 1), `${i + 1} ${this.sortScore[i].user} ${this.sortScore[i].score} `, style).setTint(0xffffff);
+    }
   }
 }

@@ -3,7 +3,6 @@ import Phaser from 'phaser';
 const GROUND_KEY = 'ground';
 const DUDE_KEY = 'dude';
 const PILL = 'pill';
-const BOMB_KEY = 'bomb';
 const VIRUS_KEY = 'virus';
 
 export default class PreloaderScene extends Phaser.Scene {
@@ -12,14 +11,14 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('blueButton1', 'assets/ui/blue_button02.png');
-    this.load.image('blueButton2', 'assets/ui/blue_button03.png');
-    this.load.image('phaserLogo', 'assets/logo.png');
+    this.load.image('blueButton1', 'src/assets/ui/blue_button02.png');
+    this.load.image('blueButton2', 'src/assets/ui/blue_button03.png');
+    this.load.image('checkedBox', 'src/assets/ui/blue_boxCheckmark.png');
+    this.load.html('name_form', 'src/assets/text/name_form.html');
+    this.load.image('phaserLogo', 'src/assets/logo.png');
     this.load.image(GROUND_KEY, 'src/assets/platform.png');
-    this.load.image(BOMB_KEY, 'src/assets/bomb.png');
     this.load.image(PILL, 'src/assets/pill.png');
     this.load.image(VIRUS_KEY, 'src/assets/virus.png');
-    this.load.image('checkedBox', 'src/assets/ui/blue_boxCheckmark.png');
     this.load.image('box', 'src/assets/ui/grey_box.png');
 
 

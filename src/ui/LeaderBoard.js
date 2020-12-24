@@ -1,7 +1,10 @@
+import 'regenerator-runtime';
 
-const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/4Xty3QGmXJkxEl3MgwnA/scores/';
+const fetch = require('node-fetch');
 
-export const putScore = async (user, score) => {
+const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/YTpJyxUfbvG1Yjr9SZcU/scores/';
+
+const postScore = async (user, score) => {
   const body = JSON.stringify({ user, score });
   const data = {
     method: 'POST',
@@ -16,7 +19,7 @@ export const putScore = async (user, score) => {
   return result;
 };
 
-export const getScores = async () => {
+const getScores = async () => {
   const data = {
     method: 'GET',
     headers: {
@@ -28,3 +31,5 @@ export const getScores = async () => {
   const scores = await response.json();
   return scores.result;
 };
+
+export { getScores, postScore };

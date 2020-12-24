@@ -6,7 +6,6 @@ import LifeLabel from '../ui/LifeLabel';
 const GROUND_KEY = 'ground';
 const DUDE_KEY = 'dude';
 const PILL = 'pill';
-// const VIRUS_KEY = 'bomb';
 const VIRUS_KEY = 'virus';
 
 
@@ -19,12 +18,13 @@ export default class GameScene extends Phaser.Scene {
     this.lifeLabel = undefined;
     this.pills = undefined;
     this.virusSpawner = undefined;
-    // this.gameOver = undefined;
+    this.gameOver = false;
     this.life = 3;
+    this.score = 0;
   }
 
   create() {
-    console.log('play');
+    this.model = this.sys.game.globals.model;
     this.add.image(400, 300, 'sky');
     this.jumpSound = this.sound.add('jump');
 
@@ -114,7 +114,6 @@ export default class GameScene extends Phaser.Scene {
     this.virusSpawner.spawn(player.x);
   }
 
-  // eslint-disable-next-line no-unused-vars
   hitBomb(player, bomb) {
     player.anims.play('turn');
     bomb.disableBody(true, true);
@@ -127,30 +126,32 @@ export default class GameScene extends Phaser.Scene {
   update() {
     if (this.life === 0) {
       this.physics.pause();
-      // this.gameOver = true;
+      this.gameOver = true;
+      this.model.score = this.score;
+      this.score = this.model.score;
       this.scene.start('GameOver');
-      // this.gameOver = false;
     }
+
     if (this.scoreLabel.score === 50) {
       this.lifeLabel.add(1);
       this.life += 1;
-      this.scoreLabel.remove(50);
     }
 
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-160);
+      this.player.setVelocityX(-200);
       this.player.anims.play('left', true);
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(160);
+      this.player.setVelocityX(200);
       this.player.anims.play('right', true);
     } else {
       this.player.setVelocityX(0);
       this.player.anims.play('turn');
     }
     if (this.cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
+      this.player.setVelocityY(-700);
       this.sound.play('jump');
     }
+    return this.model.score;
   }
 
   createScoreLabel(x, y, score) {
