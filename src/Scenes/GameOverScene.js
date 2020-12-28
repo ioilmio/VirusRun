@@ -38,8 +38,8 @@ export default class GameOverScene extends Phaser.Scene {
             score: this.model.score,
           };
           postScore(JSON.stringify(data))
-          .catch(err => console.error(err))
-          ;
+          // eslint-disable-next-line no-console
+            .catch(err => console.error(err));
           form.scene.scene.start('Title');
         }
       }
