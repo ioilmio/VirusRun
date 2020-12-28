@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const base = require('./base');
 
 module.exports = merge(base, {
@@ -23,4 +24,11 @@ module.exports = merge(base, {
       }),
     ],
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: './src/assets', to: 'dist/assets' }, // Configure // the path from where webpack will copy your assets from and the  // path where it will put it when the build is done, change it     // according to your app organization   
+      ],
+    }),
+  ],
 });
