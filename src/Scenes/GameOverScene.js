@@ -37,7 +37,9 @@ export default class GameOverScene extends Phaser.Scene {
             user: input,
             score: this.model.score,
           };
-          postScore(JSON.stringify(data));
+          postScore(JSON.stringify(data))
+          .catch(err => console.error(err))
+          ;
           form.scene.scene.start('Title');
         }
       }
@@ -53,22 +55,4 @@ export default class GameOverScene extends Phaser.Scene {
 
     return label;
   }
-
-  // async postScores(data) { // eslint-disable-line class-methods-use-this
-  //   const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/YTpJyxUfbvG1Yjr9SZcU/scores/';
-
-  //   const fetchData = {
-  //     method: 'POST',
-  //     mode: 'cors',
-  //     headers: {
-  //       Accept: 'Application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: data,
-  //   };
-
-  //   return fetch(url, fetchData).then((response) => response.json()).catch(err => {
-  //     console.log(err)// eslint-disable-line
-  //   });
-  // }
 }

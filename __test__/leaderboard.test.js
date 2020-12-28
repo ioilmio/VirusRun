@@ -13,18 +13,10 @@ test('ranking contains the user', () => {
     expect(data).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          // score: 100,
+          score: 100,
           user: 'ioilmio',
         }),
       ]),
     );
-  });
-});
-
-it('ranking contains the score', () => {
-  getScores().then(data => {
-    expect(data).toEqual(
-      expect.arrayContaining(expect.objectContaining({ score: '100', user: 'ioilmio' })),
-    );
-  });
+  }).catch(err => console.error(err))
 });
