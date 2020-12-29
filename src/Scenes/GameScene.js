@@ -116,10 +116,8 @@ export default class GameScene extends Phaser.Scene {
   hitVirus(player, virus) {
     player.anims.play('turn');
     virus.disableBody(true, true);
-    player.setTint(0xff0000);
     this.lifeLabel.remove(1);
     this.life -= 1;
-    setTimeout(player.clearTint(), 1000);
   }
 
   update() {
