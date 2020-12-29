@@ -18,7 +18,6 @@ export default class GameScene extends Phaser.Scene {
     this.lifeLabel = undefined;
     this.pills = undefined;
     this.virusSpawner = undefined;
-    this.gameOver = false;
     this.life = 3;
     this.score = 0;
   }
@@ -41,7 +40,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.player, platforms);
     this.physics.add.collider(this.pills, platforms);
     this.physics.add.collider(virusGroup, platforms);
-    this.physics.add.collider(this.player, virusGroup, this.hitBomb, null, this);
+    this.physics.add.collider(this.player, virusGroup, this.hitVirus, null, this);
     this.physics.add.overlap(this.player, this.pills, this.collectPill, null, this);
 
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -114,9 +113,9 @@ export default class GameScene extends Phaser.Scene {
     this.virusSpawner.spawn(player.x);
   }
 
-  hitBomb(player, bomb) {
+  hitVirus(player, virus) {
     player.anims.play('turn');
-    bomb.disableBody(true, true);
+    virus.disableBody(true, true);
     player.setTint(0xff0000);
     this.lifeLabel.remove(1);
     this.life -= 1;
@@ -126,9 +125,11 @@ export default class GameScene extends Phaser.Scene {
   update() {
     if (this.life === 0) {
       this.physics.pause();
-      this.gameOver = true;
       this.model.score = this.score;
       this.score = this.model.score;
+      this.scene.stop('Play');
+      this.life = 3;
+      this.score = 0;
       this.scene.start('GameOver');
     }
 
@@ -136,6 +137,7 @@ export default class GameScene extends Phaser.Scene {
       this.lifeLabel.add(1);
       this.life += 1;
       this.scoreLabel.score -= 50;
+      this.model.score -= 50;
     }
 
     if (this.cursors.left.isDown) {

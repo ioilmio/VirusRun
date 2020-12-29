@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin';
 
 const config = {
   type: Phaser.AUTO,
@@ -17,13 +16,6 @@ const config = {
     arcade: {
       gravity: { y: 700 },
     },
-  },
-  plugins: {
-    scene: [{
-      key: 'rexUI',
-      plugin: UIPlugin,
-      mapping: 'rexUI',
-    }],
   },
 };
 

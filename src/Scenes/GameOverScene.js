@@ -21,7 +21,8 @@ export default class GameOverScene extends Phaser.Scene {
     this.menuText = this.add.text(0, 0, 'Play Again?', { fontSize: '32px', fill: '#fff' });
     Phaser.Display.Align.In.Center(this.menuText, this.menuButton);
     this.menuButton.on('pointerdown', () => {
-      this.scene.start('Title');
+      this.scene.stop('GameOver');
+      this.scene.start('Play');
     });
 
     this.add.text(300, 100, 'Enter your name:', { color: 'white', fontFamily: 'Arial', fontSize: '24px ' });
@@ -33,9 +34,10 @@ export default class GameOverScene extends Phaser.Scene {
         const inputUsername = form.getChildByName('username');
         if (inputUsername.value !== '') {
           const input = inputUsername.value;
-          postScore(input, this.model.score)
-          // eslint-disable-next-line no-console
+          await postScore(input, this.model.score)
+            // eslint-disable-next-line no-console
             .catch(err => console.error(err));
+          form.scene.scene.stop('GameOver');
           form.scene.scene.start('Title');
         }
       }
