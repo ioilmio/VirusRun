@@ -138,6 +138,7 @@ export default class GameScene extends Phaser.Scene {
       this.life += 1;
       this.scoreLabel.score -= 50;
       this.model.score -= 50;
+      this.score -= 50;
     }
 
     if (this.cursors.left.isDown) {
