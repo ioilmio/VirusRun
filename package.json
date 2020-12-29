@@ -30,7 +30,6 @@
     "babel-jest": "^26.1.0",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
-    "copy-webpack-plugin": "^7.0.0",
     "file-loader": "^6.0.0",
     "jest": "^26.1.0",
     "jest-canvas-mock": "^2.2.0",
@@ -40,6 +39,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "copy-webpack-plugin": "^7.0.0",
     "clean-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^4.3.0",
     "node-fetch": "^2.6.0",

@@ -33,11 +33,7 @@ export default class GameOverScene extends Phaser.Scene {
         const inputUsername = form.getChildByName('username');
         if (inputUsername.value !== '') {
           const input = inputUsername.value;
-          const data = {
-            user: input,
-            score: this.model.score,
-          };
-          postScore(JSON.stringify(data))
+          postScore(input, this.model.score)
           // eslint-disable-next-line no-console
             .catch(err => console.error(err));
           form.scene.scene.start('Title');
@@ -47,9 +43,9 @@ export default class GameOverScene extends Phaser.Scene {
   }
 
 
-  createScoreLabel(x, y, score) {
+  createScoreLabel(x, y) {
     const style = { fontSize: '32px', fill: '#000' };
-    const label = new ScoreLabel(this, x, y, score, style);
+    const label = new ScoreLabel(this, x, y, this.model.score, style);
 
     this.add.existing(label);
 
