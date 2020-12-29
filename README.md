@@ -34,8 +34,10 @@ A Game developed using Phaser3 framework
 
 ### This is a game built using Phaser3 framework, is bundled using Webpack, it has different scenes and options;
 
-### For more info about the game look at the Game design document 
-TBA
+### For more info about the game look at the Game design document
+
+Here you can check the [GDD](gdd.md)
+
 ### Built With
 
 This project was built using these technologies.
@@ -50,7 +52,8 @@ This project was built using these technologies.
 
 ## Live version
 
-TBA
+[Live version](https://inspiring-joliot-661ac0.netlify.app/)
+
 ### Usage
 
 Type in your temrinal:
@@ -59,10 +62,11 @@ Type in your temrinal:
 - to install dependencies `npm install`
 - to build the project using webpack `npm run build`
 - to run the dev server `npm start`
+- to run test `npm run test`
 
-1. open a browser and go to `localhost:8080`
+1. open a browser and go to `localhost:8080` or click the link above for the live version;
 2. After the loading and intro scenes, click to play to begin or click options to tweak sound and music in the game;
-3. Enjoy your game; 
+3. Enjoy your game;
 
 ## Author
 
@@ -86,3 +90,5 @@ Give a ⭐️ if you like this project!
 
 - [Microverse](https://www.microverse.org/)
 - [The Odin Project](https://www.theodinproject.com/)
+- [Phaser3](https://phaser.io/phaser3) for the tutorial
+- [Zenva](https://academy.zenva.com/product/html5-game-phaser-mini-degree/) for the tutorial
