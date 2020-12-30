@@ -27,7 +27,7 @@ test('ranking contains the user', () => {
       ]),
     );
     // eslint-disable-next-line no-console
-  }).catch(err => console.error(err));
+  }).catch(() => { });
 });
 
 test('Return score', async () => {
@@ -47,7 +47,6 @@ test('Return score', async () => {
       }),
     ]),
   );
-  // expect(fetch.mock.calls.length).toEqual(1);
 });
 
 test('Return value for POST action', () => {
