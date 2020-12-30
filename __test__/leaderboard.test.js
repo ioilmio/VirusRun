@@ -26,7 +26,6 @@ test('ranking contains the user', () => {
         }),
       ]),
     );
-    // eslint-disable-next-line no-console
   }).catch(() => { });
 });
 
